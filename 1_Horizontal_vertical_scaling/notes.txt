@@ -1,0 +1,37 @@
+Scaling, we do it whenever users have grown to a large extent and we need to get more users with less 
+response time. In this case we do scaling. 
+
+1. Horizontal scaling 
+    1. Increasing the number of the computers or servers 
+    2. There is a need of load balancing in horizontal scaling because as there are more number of server now, 
+        so we need to decide when the request comes which server is free to process that request with minimum 
+        response time. 
+    3. It is Resilient, which means anyone server goes down it does not affect the entire system. Every server 
+        is independent of the processing of the Other servers. 
+    4. So here if the two process want to interact with each other and the reside on two servers. Then there 
+        will be network calls between the two server to communicate that two processes. As we know that RPC remote 
+        procedure call will be used for communicating between the two processes for message passing. 
+    5. It is data inconsistent. As there are more number of the servers it can happen that the operations on 
+        the single data can be performed on the two different servers. So we are affecting the data atomicity. 
+        According to the acid principle to make the data consistent it should be retain atomic transactions. Which 
+        means a single transaction is handled by a single server at a single point of time. 
+    6. It scales very easily because we need to only add new servers in a line as a word need increases with 
+        the increase in the users. So it simple.
+
+2. Vertical scaling 
+    1. Increasing the size of a computer or server. 
+    2. There is no need of any load balancing as there is only one server. 
+    3. There is a single point of failure here. There is only a single server so if it goes down then everything 
+        fails for us. 
+    4. As all the processes reside inside a single server therefore they are free to communicate with the enter 
+        process communication which is very fast compared to RPC. So the communication in vertical scaling is faster 
+        than horizontal gaming
+    5. Data is consistent in this case. And there is only one server so that is only one instance of the data. 
+    6. There is always a limit on the hardware. It is not possible to increase the hardware capabilities of a 
+        system to a very larger extent. At some point the hardware enlargement is not possible. 
+
+So in real life a combination of horizontal and vertical scaling approach is used. 
+Initially we can start with the vertical scaling and if you see that our users are increasing and their 
+liking our product then we can shift to horizontal scaling. Always the answer is the hybrid approach taking 
+the good qualities of vertical scalene that it is consistent and process communication is faster and from 
+the horizontal scaling the advantages are resilient and good scalability.
