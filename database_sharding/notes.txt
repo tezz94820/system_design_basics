@@ -1,0 +1,25 @@
+Database sharding 
+
+1. In this we try to divide the database servers into multiple sections. That is very similar to cutting a 
+    pizza into multiple pieces. Each peace will contain a different type of data; now there is a problem arised 
+    on what basis are we going to shard. 
+2. There are two types of shading possible that is horizontal and vertical Database sharding. Is based on a 
+    single key order single parameter and Database sharding on that parameter. Where as vertical sharding it is 
+    different. 
+3. So we take a key. Let's say we want to shard tender database server. Then the key can we age. On the basis 
+    of age we can shard the database. Aur on the basis of the user id we can shard it. 
+
+problems :- 
+    1. If there is a request from the user that requires the combination of the two shards. Then we need to go 
+        to that individual shard and get the individual information and then combine or joined together and then 
+        serve it to the client. It is a very happy and expensive request. 
+    2. Here consistency will be an issue. There can be multiple users reading the same shard why it is written by
+        other server. At this time we can use the masters slave architecture. All the writing task will be done in 
+        the master node and all the reading task will be done at the slave nodes. And all the slave nodes will Fetch
+        the data from master node. This problem is relatively solved. 
+
+But you should not go directly on the Shading and all without trying the indexing. 
+
+You can even do indexing on the each part of sharded database. It is a good approach. Even each piece of a 
+sharded database can be again divided into multiple sections on the basis of any priority. This option is 
+also available
