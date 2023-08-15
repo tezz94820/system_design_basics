@@ -1,0 +1,74 @@
+Image-1
+
+Monolith and microservice architectures 
+
+1. It is being MS assumed that a monolith architecture has only a single big machine, and in microservice 
+    architecture there are many and many smaller machines which are connected together. It is wrong 
+2. Even the monolith architecture their can be multiple machines, but the point is that all the things are 
+    done by that only. Which means if there are two task A,B then both the task can be completed by a single
+    machine. Their can be multiple machines in monolith architecture, and each machine has the capability of 
+    doing both work. 
+3. Which is what exactly differs from microservice architecture. In this task A is done by one micro 
+    service, and task be is done by the another micro service. Each can how it's different database one micro 
+    service can talk to another microservice or there is a gateway in between through which the communication 
+    happens. It is even possible that we have many machines in monolith and few machines in microservice 
+    architecture as well. 
+
+
+Image-2
+
+Monolith Architecture. 
+
+Advantages :- 
+    1. It is simple as every machine is able to do same type of work it is very simple to scale such a type of 
+        architecture. If we have a small/ cohesive team then you should apply monolith architecture. 
+    2. It is less Complex and easy to scale, even your team does not need to handle multiple servers doing 
+        different task and collaborate between them. You do not have to break your entire system into small task and
+        handle it independently. 
+    3. There will be a single database which will be responsible for storing all the data. So there will be no 
+        duplication of the data within the multiple servers. 
+    4. It is faster. Every logic in each other remain same. That means every request can be handled by the single 
+        server. So there will be no RPC calls within the network of the servers and handset will be fast without 
+        overhead. 
+
+Disadvantages 
+    1. It will be very difficult for a new developer to come and understand the entire architecture at a single 
+        glance, as a team it is very difficult to work with this architecture. Because you are the work and not be 
+        divided on the basis of the task and a particular developer can assigned and do that task independently 
+        without affecting the code of the another service. 
+    2. Deployment :- so as soon as there is a single change in the code every server needs to be changed and 
+        deployed again on the network. That means a single change in the code will need to change all the servers. 
+    3. If while developing the code, there is a single error then not only one server but the entire list of the 
+        servers will be disturbed. Hair coupling strong rather than Cohesion 
+
+
+Image-3
+
+Micro services 
+
+Advantages :-
+    1. Scalability :- here is the scalability is high, because we have divided the task and each server is  
+        doing a separate task it is very easy to scale only a single service. We can deploy multiple server for a 
+        single service. 
+    2. Then new developers we can assigned them separate task which is related to only one single microservice 
+        and he can handle or owner of that microservice as well. 
+    3. Working in Parallel :- so if there are two service A,B then developers can work on both the service at a
+        single time without damaging another service. So if the task A is is changed it will not affect the task be. 
+        Less coupling and more cohesion. 
+
+Disadvantage :-
+    1. There is only one disadvantage which is the major one that it is very and very difficult to design a micro 
+        service architecture. It is very difficult to decide do we even need a microservice architecture or not. 
+        Because the connection or communication time is a cost which acts as a overhead in this architecture. Let's 
+        see always It is seen that server S1 calls server S2 . And server S2 is not called by any other servers. 
+        Then it can be clearly see in that S1 depends totally on S2. So it not be separate services it should be a 
+        single service. Like this there can be multiple problems while designing the microservice architecture. 
+        This needs to be created by the designer in a very good way so that services do not increase in the number 
+        without having any sense. 
+
+        
+
+So it is very difficult to decide which one is better. Even major companies like Google and Facebook even 
+use the monolith architecture, even stack overflow use monolith architecture. So you cannot always apply 
+micro service architecture on any system. Like it is always seen that microservice architecture is applied 
+which is the bigger system or a system which has multiple functionalities so carefully assign it.
