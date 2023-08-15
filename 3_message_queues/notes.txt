@@ -1,0 +1,40 @@
+Message queue 
+
+Image-1 
+
+1. So here every pizza shop is a server. And a Pizza shop serving a pizza is just like a server serving a 
+    request. So if more than one request comes to a single server what will it do. It will create a message 
+    queue, and will store one by one messages in it and give a quick response to the customer at that time. 
+    So if there is a request that will be a quick response to the customer just like "Ok" and the server will 
+    work for completing that request. 
+2. Now the request can also have the priority. The high priority job or request can be full filled first 
+    with respect to a low priority job. 
+3. Now let us assume that there are multiple servers you are working with and the request can go to any of 
+    the server. Let us see their are four servers just like a pizza shop there are four Pizza shops. One of the 
+    server goes down then we need to share our message to with the other server how can it be done because the 
+    server is down now comes the rule of a database. We can create a central database which stores all the 
+    message and if any server goes down then that message queue will be shared to all the servers and get the 
+    job done. So now we need a central database to act in between all the servers. 
+
+Image-2 
+1. So now let us assume that one of the server is failed then how will you resolve it. One of the 
+    architecture that can be imagined is that all the other servers will continuously check the database that 
+    the other server is failed or not. Because the server which is failed cannot see to the database that he is 
+    failed or cannot see to the other service that he is failed. So what will be the mechanism followed for the 
+    other server to tell and distribute the task which of the field server had. 
+2. What we can do is, there will be a notice in the middle of all the server and the database . The notifier w
+    ill send the Heartbeat request to each and every server at every 15 seconds or 10 seconds and check the life 
+    of a server. If the server has gone down the it will not respond and hence the notifier can take all the task 
+    of the server which is failed and distribute it to all the other working servers. 
+3. The distribution of all the task is done by the load balancer. Yes load balance the problem of 
+    distributing the task but it all that one server does not get the request. Means if any server is doing the 
+    task 3 then any other server will not get the task 3 and even that server will not get the task 3, because 
+    it is already performing it. 
+4. Now this task of notifier + load balancer is done by the single instrument which is called as a message 
+    queue. So message q is responsible for checking the server living status. And even is responsible for 
+    distributing left task among the. 
+
+
+Image-3
+
+Examples are RABBIT MQ , JMS(java messaging service) , ZERO MQ
