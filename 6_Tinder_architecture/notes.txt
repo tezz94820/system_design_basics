@@ -1,0 +1,92 @@
+Tinder architecture 
+
+So while thinking of this architecture we do not just get into the game and thinking about the solution. 
+First we need to list down all the basic features that our app should have. 
+
+Picking primary features :- 
+    1. Storing profiles :- obviously we are going to store the profile of each and every user. So let's take an 
+        example how many images we are going to store per user, let take it 5 images for user. 
+    2. Recommendation Matches  :- for this feature we can ask the interviewer the number of the users this app is 
+        having. So we can get a idea about how the recommendation system will work. 
+    3. Note matches :- latest assume that 10% of the total users matches after swipes. That is every 10th swipe 
+        is a match. That is now assume that for a moment. 
+    4. Direct messaging :- now whoever is matched we need to established connection between them , so that they 
+        should be able to chat with each other. 
+
+Now latest take the feature one by one and go in depth 
+
+    1. Storing profiles :- and how the storing of the name address and age can be done in the database table 
+        with its column but the mean effort is storing images. Now while storing images you can do it in 2 formats:- 
+            1. File system :- you can directly told your images of file in some distributed file system. 
+            2. BLOB (binary large object) :- you can also store your image as a binary object inside the database. 
+        Let us see the advantages that storing something in a database gives us :- 
+            1. Mutability :- storing something in column allows us to mutate it with an ease. But while storing images 
+                with do not need of mutability because we are not going to change in a binary bites of a image we are going 
+                to change the entire file so I think we do not need it. 
+            2. Transaction acid properties :- consistency of data but as a whole we can just get it inside the file 
+                system. We want that when we update it know other use can get the old image. 
+            3. Indexing :- this help us to search an image particularly, but we do not have to search the image by some 
+                of the bytes. We want to search an entire image and indexing can't help in it. 
+            4. Access control :- yes we want the access of every file this is a necessary feature of the database which 
+                we want but this feature can be achieved by the distributed file system as well 
+
+So finally we are going to use the distributed file system for saving our images. 
+
+Distributed file system :- 
+    1. Cheaper :- it is cheaper than the database saving the blobs. 
+    2. Faster :- as we know that the image files are static. That means we can even apply a cdn(content delivery 
+        network). A cdn can store the images in the cache and serves it to the user whenever required very fast. 
+    3. Now after storing the image in a distributed file system it will give us a uRL which will be evening 
+        for every image and we will store that you are l inside the database. So there will be a table consisting of 
+        three columns profile id image Id and URL. So the primary key here will be a combination of the profile ID 
+        and image Id. 
+
+Image-2 
+
+1. Saving the profile/images and user authentication. 
+    1. If it is a monolith kernel architecture that means we are only dealing with the server having the complete 
+        processing of the data without any divided services. Then the user will share its username and password with 
+        the profile service server and it will be responsible for its authentication and sending the request back to 
+        the user. But 
+    2. If you are using a micro service architecture then we are going to divide the working or features of the 
+        server. We build a server known as profile service and the other is image service. Profile service will be 
+        responsible for storing all the data related to profile section like name,age,address . 
+    3. For authentication there will be a Gateway between the user and the profile section. Why we included the 
+        Gateway is because every time the user is checking its token and then it will be entered into over system 
+        for getting that service. We do not want that much load on our servers for checking the same token every 
+        time. so , we give this responsibility to The Gateway service. User will contact only Gateway service and 
+        then it will pass some of the IT information to the profile section and get a response as yes or no and 
+        hence the late and see increases. The Gateway can be an API gateway. Which will distribute the request by 
+        looking at it service requirement. If it requires the images the API Gateway will transfer that request to 
+        the image server service. 
+    4. We stored all the images differently and give all its Axis to the images service because in the future 
+        there can be a possibility of making the predictions and classifications on the basis of the images. So we 
+        don't it all differently,To access the differently. 
+
+Image-3 
+2. Chat feature :- 
+    1. For implementing the chart feature between the two users we need to use a protocol. Now up the now we are
+        known of the three protocols xmpp(Extensible Messaging and Presence Protocol) , websockets and real time 
+        communication(rtc) . 
+    So for simple chat we are going to use the web socket. There will be a separate server which will be 
+    listening to the event which are remented per user. So there will be a room where the two users will be 
+    there and they can internet with each other. 
+
+Image-4 
+
+3. Matching algorithm :- we need to make sure that whenever a person matches it goes to the matching server 
+    and the matching server will store that matches in a database. If in case the user uninstall the app and 
+    install it again it remembers all its matches. The matches is then connected to the sessions and again to 
+    The Gateway so that once the people are matched they should be allowed to chat with each other. 
+
+Image-5 
+
+4. Recommendation engine :- 
+    1. We are not talking about the AI,j to recommend a particular user to the particular use of but what you 
+        are talking about this system behind what will be the requirement will it need. 
+    2. For building a recommendation system we will need a distributed database it could be cassandra/ dynamo. 
+        If you want to use the relational database then you can even do the sharding on the database on the basis of 
+        some keys. You can store your users insider distributed database on the basis of some keys that keys can be 
+        the location, gender,age.
+
+
