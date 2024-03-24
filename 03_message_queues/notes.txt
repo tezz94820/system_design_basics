@@ -38,3 +38,14 @@ Image-2
 Image-3
 
 Examples are RABBIT MQ , JMS(java messaging service) , ZERO MQ
+
+
+
+Hussain nussair
+When to use Message Queues ?
+
+1. So when you have a request which is taking a lot of time to execute and when you know that some requests take  long time.the user will for it srequest to be completed which is completly fine but uptill that the user will not get any response saying that your request is being processed or is in waiting state.
+2. so here we can use mesage queue. where the request will enter message queue and then then it will be alloted to the free server.Then the message queue will respond to the clint as soon the client makes a request. Now the client will get the response of the request processign a the instant.
+3. the server now will be only ressponsible for processing and did not take the tension of request queueing and all.
+4. the message queue is also responsible for checking the availability of server by using heartbeat.
+
